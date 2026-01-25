@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ドンキ 商品検索 UI（モック）</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="phone">
+    <div class="app">
+
+      <header class="header">
+        <button class="info-btn" type="button" aria-label="info">
+          <span class="info-circle">i</span>
+        </button>
+
+        <div class="lang">
+          <div class="lang-title">表示する言語を選択</div>
+          <div class="lang-flags" role="tablist" aria-label="languages">
+            <button class="flag active" type="button" aria-label="日本語">
+              <img src="./assets/flag_jp.png" alt="日本語">
+            </button>
+            <button class="flag" type="button" aria-label="English">
+              <img src="./assets/flag_us.png" alt="English">
+            </button>
+            <button class="flag" type="button" aria-label="中文">
+              <img src="./assets/flag_cn.png" alt="中文">
+            </button>
+            <button class="flag" type="button" aria-label="한국어">
+              <img src="./assets/flag_kr.png" alt="한국어">
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+
+        <!-- upload card -->
+        <section class="card upload">
+          <div class="upload-title">商品の画像をアップロードして商品を探す</div>
+
+          <div class="upload-row">
+            <div class="upload-icon">
+              <img src="./assets/camera_icon.png" alt="">
+            </div>
+
+            <div class="upload-actions">
+              <button class="upload-btn" type="button">画像をアップロード</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- text search area -->
+        <section class="card text-search" id="textSearchCard">
+          <!-- 検索前に見えるのはここだけ（タブ＋検索窓＋検索ボタン） -->
+          <div class="text-search-head" id="textSearchHead">
+            <div class="tabs" role="tablist" aria-label="カテゴリ">
+              <button class="tab active" type="button">食品</button>
+              <button class="tab" type="button">非食品</button>
+              <button class="tab" type="button">酒類・薬品</button>
+              <button class="tab" type="button">商品コード</button>
+            </div>
+
+            <div class="search-row">
+              <div class="search-pill">
+                <input class="search-input" id="searchInput" type="text" placeholder="探している商品名などを入力してください">
+              </div>
+              <button class="search-btn" id="searchBtn" type="button">検索</button>
+            </div>
+          </div>
+
+          <!-- 検索結果エリア：検索前は完全に非表示 -->
+          <div class="text-search-body" id="textSearchBody" hidden>
+            <!-- ここは固定（スクロールしない） -->
+            <div class="hint">
+              <div class="donpen">
+                <img src="./assets/donpen_icon.png" alt="ドンペン">
+              </div>
+              <div class="hint-text">
+                <div class="hint-strong">お探しの商品に近い物はこちらです</div>
+                <div class="hint-sub">商品名をタップすると商品の場所が表示されます</div>
+              </div>
+            </div>
+
+            <!-- ここだけスクロール -->
+            <div class="results-frame">
+              <div class="results-scroll" id="resultsList" aria-label="検索結果一覧">
+                <!-- 初期3件（1回目の検索で表示する想定。最初は空でもOKだが挙動確認しやすく初期DOMも残す） -->
+                <button class="result" type="button">
+                  <div class="thumb"><img src="./assets/sample_thumb_1.jpg" alt=""></div>
+                  <div class="rname">きのこの山</div>
+                  <div class="pin" aria-hidden="true">📍</div>
+                  <div class="chev" aria-hidden="true">›</div>
+                </button>
+
+                <button class="result" type="button">
+                  <div class="thumb"><img src="./assets/sample_thumb_2.jpg" alt=""></div>
+                  <div class="rname">キットカット</div>
+                  <div class="pin" aria-hidden="true">📍</div>
+                  <div class="chev" aria-hidden="true">›</div>
+                </button>
+
+                <button class="result" type="button">
+                  <div class="thumb"><img src="./assets/sample_thumb_3.jpg" alt=""></div>
+                  <div class="rname">地球グミ</div>
+                  <div class="pin" aria-hidden="true">📍</div>
+                  <div class="chev" aria-hidden="true">›</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- floor map button -->
+        <section class="map-wrap">
+          <button class="map-btn" type="button">
+            <span class="play" aria-hidden="true">▶</span>
+            <span class="map-text">フロアマップ全体を見る</span>
+          </button>
+        </section>
+
+      </main>
+
+      <!-- bottom reco -->
+      <section class="reco">
+        <div class="reco-title">おすすめ商品はこちら</div>
+
+        <div class="reco-viewport">
+          <div class="reco-track" aria-label="おすすめ商品">
+            <div class="reco-card"><img src="./assets/reco_1.jpg" alt=""></div>
+            <div class="reco-card"><img src="./assets/reco_2.jpg" alt=""></div>
+            <div class="reco-card"><img src="./assets/reco_3.jpg" alt=""></div>
+            <div class="reco-card"><img src="./assets/reco_1.jpg" alt=""></div>
+            <div class="reco-card"><img src="./assets/reco_2.jpg" alt=""></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
