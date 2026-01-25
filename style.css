@@ -9,11 +9,10 @@
   --radius-lg: 18px;
   --radius-md: 14px;
 
-  /* 端末幅に合わせて文字が暴れないように clamp で統一 */
-  --fs-title: clamp(18px, 4.6vw, 22px);      /* 「表示する言語を選択」 */
+  --fs-title: clamp(18px, 4.6vw, 22px);
   --fs-upload-title: clamp(15px, 3.6vw, 18px);
   --fs-tab: clamp(12px, 3.2vw, 14px);
-  --fs-btn: clamp(15px, 3.8vw, 18px);        /* 検索/アップロード */
+  --fs-btn: clamp(15px, 3.8vw, 18px);
   --fs-input: clamp(13px, 3.4vw, 15px);
   --fs-hint-strong: clamp(13px, 3.4vw, 15px);
   --fs-hint-sub: clamp(11px, 3.0vw, 12px);
@@ -24,8 +23,6 @@
 
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
-
-/* iOSなどの自動文字拡大で「端末によって文字がデカい」を抑制 */
 html{
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -36,37 +33,76 @@ body{
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
   background: #111;
   display:flex;
-  align-items:center;
+  align-items:stretch;
   justify-content:center;
   padding:14px;
 }
 
+/* 端末で画面が小さい場合も「アプリ全体がスクロール」できるようにする */
 .phone{
   width:min(420px, 100%);
+  height: calc(100dvh - 28px);
   border-radius: 26px;
   background:#000;
   padding:10px;
   box-shadow: 0 20px 40px rgba(0,0,0,.45);
+  overflow:hidden;
 }
 
 .app{
+  position:relative;
+  height:100%;
   border-radius: 18px;
-  overflow:hidden;
+  overflow-y:auto;           /* ← ここで全体スクロール */
+  overflow-x:hidden;
   background: var(--bg);
   background-image: url("./assets/bg_pattern.jpg");
   background-size: cover;
   background-position: center;
-  min-height: 780px;
   display:flex;
   flex-direction:column;
 }
 
+/* 検索中オーバーレイ */
+.search-overlay[hidden]{
+  display:none !important;
+}
+.search-overlay{
+  position:absolute;
+  inset:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}
+.search-overlay-inner{
+  width:min(240px, 70%);
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow:hidden;
+  box-shadow: 0 18px 32px rgba(0,0,0,.35);
+  background: rgba(255,255,255,.9);
+}
+.search-overlay-inner img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* ヘッダーはスクロールしても消えないように */
 .header{
+  position: sticky;
+  top: 0;
+  z-index: 30;
   display:grid;
   grid-template-columns: 56px 1fr;
   gap:10px;
   align-items:center;
   padding:16px 14px 8px;
+  background: rgba(242,180,63,.92);
+  backdrop-filter: blur(2px);
 }
 
 .info-btn{
@@ -177,11 +213,9 @@ body{
 .text-search{
   padding: 10px 12px 12px;
 }
-
 .text-search-body[hidden]{
   display:none !important;
 }
-
 .text-search-head{
   display:flex;
   flex-direction:column;
@@ -283,13 +317,11 @@ body{
   border:1px solid rgba(0,0,0,.06);
   background:#fff;
 }
-
 .results-scroll{
   max-height: 210px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
-
 .result{
   width:100%;
   border:0;
@@ -302,7 +334,6 @@ body{
   cursor:pointer;
 }
 .result + .result{ border-top:1px solid rgba(0,0,0,.08); }
-
 .thumb{
   width:52px;
   height:52px;
@@ -311,7 +342,6 @@ body{
   overflow:hidden;
 }
 .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
-
 .rname{
   font-weight:900;
   font-size: var(--fs-result);
@@ -343,6 +373,7 @@ body{
   text-underline-offset: 4px;
 }
 
+/* bottom reco */
 .reco{
   margin-top:auto;
   background: rgba(0,0,0,.78);
@@ -375,7 +406,6 @@ body{
 }
 .reco-card img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-/* 小型端末でタップしやすいように余白調整だけ */
 @media (max-width:360px){
   .header{ padding:14px 12px 8px; }
   .main{ padding:8px 12px 10px; }

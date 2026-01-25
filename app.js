@@ -17,6 +17,30 @@
     });
   });
 
+  // ----- search overlay -----
+  const overlay = document.getElementById("searchOverlay");
+  let overlayTimer = null;
+
+  const showSearchingFor2s = () => {
+    if (!overlay) return Promise.resolve();
+
+    // 連打対策：タイマーが残ってたらリセット
+    if (overlayTimer) {
+      clearTimeout(overlayTimer);
+      overlayTimer = null;
+    }
+
+    overlay.hidden = false;
+
+    return new Promise((resolve) => {
+      overlayTimer = setTimeout(() => {
+        overlay.hidden = true;
+        overlayTimer = null;
+        resolve();
+      }, 2000);
+    });
+  };
+
   // ----- text search behavior (stack results) -----
   const searchBtn = document.getElementById("searchBtn");
   const searchInput = document.getElementById("searchInput");
@@ -29,14 +53,12 @@
     const btn = document.createElement("button");
     btn.className = "result";
     btn.type = "button";
-
     btn.innerHTML = `
       <div class="thumb"><img src="${thumbSrc}" alt=""></div>
       <div class="rname">${name}</div>
       <div class="pin" aria-hidden="true">📍</div>
       <div class="chev" aria-hidden="true">›</div>
     `;
-
     return btn;
   };
 
@@ -46,14 +68,11 @@
     const thumb = "./assets/sample_thumb_2.jpg";
     const names = ["たけのこのさと", "チョコもなかジャンボ", "やきいも"];
 
-    // 3件を上に積む（順序は上から names[0], names[1], names[2]）
-    // prependの性質上、逆順にinsertすると表示順が綺麗に揃う
     const nodes = names.map(n => makeResultButton(n, thumb));
     for (let i = nodes.length - 1; i >= 0; i--) {
       resultsList.insertBefore(nodes[i], resultsList.firstChild);
     }
 
-    // 追加後はリストの先頭を見せたい（上に積んだ3件がすぐ見える）
     resultsList.scrollTop = 0;
   };
 
@@ -62,16 +81,19 @@
     body.hidden = false;
   };
 
-  const onSearch = () => {
+  const runSearchFlow = async () => {
+    // 2秒「検索中」演出
+    if (searchBtn) searchBtn.disabled = true;
+    await showSearchingFor2s();
+    if (searchBtn) searchBtn.disabled = false;
+
+    // 演出後に結果更新（見た目確認用）
     showResultsAreaIfNeeded();
 
-    // 1回目は「既存の3件を表示する」だけ（＝追加はしない）
-    // 2回目以降は上に3件追加
     if (hasShownOnce) {
       prependBatch();
     } else {
       hasShownOnce = true;
-      // 初回はリストの先頭に合わせるだけ（見え方安定）
       if (resultsList) resultsList.scrollTop = 0;
     }
 
@@ -79,14 +101,16 @@
   };
 
   if (searchBtn) {
-    searchBtn.addEventListener("click", onSearch);
+    searchBtn.addEventListener("click", () => {
+      runSearchFlow();
+    });
   }
 
   if (searchInput) {
     searchInput.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
-        onSearch();
+        runSearchFlow();
       }
     });
   }

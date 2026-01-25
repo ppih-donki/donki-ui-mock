@@ -10,6 +10,13 @@
   <div class="phone">
     <div class="app">
 
+      <!-- 検索中オーバーレイ（2秒表示） -->
+      <div class="search-overlay" id="searchOverlay" hidden aria-hidden="true">
+        <div class="search-overlay-inner">
+          <img src="./assets/serch.jpg" alt="検索中">
+        </div>
+      </div>
+
       <header class="header">
         <button class="info-btn" type="button" aria-label="info">
           <span class="info-circle">i</span>
@@ -36,7 +43,6 @@
 
       <main class="main">
 
-        <!-- upload card -->
         <section class="card upload">
           <div class="upload-title">商品の画像をアップロードして商品を探す</div>
 
@@ -51,9 +57,7 @@
           </div>
         </section>
 
-        <!-- text search area -->
         <section class="card text-search" id="textSearchCard">
-          <!-- 検索前に見えるのはここだけ（タブ＋検索窓＋検索ボタン） -->
           <div class="text-search-head" id="textSearchHead">
             <div class="tabs" role="tablist" aria-label="カテゴリ">
               <button class="tab active" type="button">食品</button>
@@ -70,9 +74,7 @@
             </div>
           </div>
 
-          <!-- 検索結果エリア：検索前は完全に非表示 -->
           <div class="text-search-body" id="textSearchBody" hidden>
-            <!-- ここは固定（スクロールしない） -->
             <div class="hint">
               <div class="donpen">
                 <img src="./assets/donpen_icon.png" alt="ドンペン">
@@ -83,10 +85,8 @@
               </div>
             </div>
 
-            <!-- ここだけスクロール -->
             <div class="results-frame">
               <div class="results-scroll" id="resultsList" aria-label="検索結果一覧">
-                <!-- 初期3件（1回目の検索で表示する想定。最初は空でもOKだが挙動確認しやすく初期DOMも残す） -->
                 <button class="result" type="button">
                   <div class="thumb"><img src="./assets/sample_thumb_1.jpg" alt=""></div>
                   <div class="rname">きのこの山</div>
@@ -112,7 +112,6 @@
           </div>
         </section>
 
-        <!-- floor map button -->
         <section class="map-wrap">
           <button class="map-btn" type="button">
             <span class="play" aria-hidden="true">▶</span>
@@ -122,7 +121,6 @@
 
       </main>
 
-      <!-- bottom reco -->
       <section class="reco">
         <div class="reco-title">おすすめ商品はこちら</div>
 
