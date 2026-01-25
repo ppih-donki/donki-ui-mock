@@ -13,7 +13,7 @@
   --fs-upload-title: clamp(15px, 3.6vw, 18px);
   --fs-tab: clamp(12px, 3.2vw, 14px);
   --fs-btn: clamp(15px, 3.8vw, 18px);
-  --fs-input: clamp(13px, 3.4vw, 15px);
+  --fs-input: clamp(13px, 3.4vw, 15px); /* 全体設計値（ただしiPhoneズーム対策でinput本体は16px固定する） */
   --fs-hint-strong: clamp(13px, 3.4vw, 15px);
   --fs-hint-sub: clamp(11px, 3.0vw, 12px);
   --fs-result: clamp(16px, 4.2vw, 20px);
@@ -38,7 +38,6 @@ body{
   padding:14px;
 }
 
-/* 端末で画面が小さい場合も「アプリ全体がスクロール」できるようにする */
 .phone{
   width:min(420px, 100%);
   height: calc(100dvh - 28px);
@@ -53,7 +52,7 @@ body{
   position:relative;
   height:100%;
   border-radius: 18px;
-  overflow-y:auto;           /* ← ここで全体スクロール */
+  overflow-y:auto;
   overflow-x:hidden;
   background: var(--bg);
   background-image: url("./assets/bg_pattern.jpg");
@@ -63,10 +62,7 @@ body{
   flex-direction:column;
 }
 
-/* 検索中オーバーレイ */
-.search-overlay[hidden]{
-  display:none !important;
-}
+.search-overlay[hidden]{ display:none !important; }
 .search-overlay{
   position:absolute;
   inset:0;
@@ -91,7 +87,6 @@ body{
   display:block;
 }
 
-/* ヘッダーはスクロールしても消えないように */
 .header{
   position: sticky;
   top: 0;
@@ -213,9 +208,7 @@ body{
 .text-search{
   padding: 10px 12px 12px;
 }
-.text-search-body[hidden]{
-  display:none !important;
-}
+.text-search-body[hidden]{ display:none !important; }
 .text-search-head{
   display:flex;
   flex-direction:column;
@@ -257,13 +250,16 @@ body{
   padding:10px 14px;
   border: 1px solid rgba(0,0,0,.06);
 }
+
+/* ★iPhone入力ズーム対策：inputのfont-sizeを16px以上に固定 */
 .search-input{
   width:100%;
   border:0;
   outline:none;
-  font-size: var(--fs-input);
+  font-size: 16px;         /* ← 重要 */
   font-weight:800;
   background: transparent;
+  line-height: 1.2;
 }
 .search-input::placeholder{
   color:#9a9a9a;
@@ -373,7 +369,6 @@ body{
   text-underline-offset: 4px;
 }
 
-/* bottom reco */
 .reco{
   margin-top:auto;
   background: rgba(0,0,0,.78);
