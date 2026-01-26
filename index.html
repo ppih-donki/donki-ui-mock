@@ -10,7 +10,6 @@
   <div class="phone">
     <div class="app">
 
-      <!-- 検索中オーバーレイ（2秒表示） -->
       <div class="search-overlay" id="searchOverlay" hidden aria-hidden="true">
         <div class="search-overlay-inner">
           <img src="./assets/serch.jpg" alt="検索中">
@@ -58,6 +57,9 @@
         </section>
 
         <section class="card text-search" id="textSearchCard">
+          <!-- 追加：アップロード見出しと同じ見た目 -->
+          <div class="text-title">テキスト検索で商品を探す</div>
+
           <div class="text-search-head" id="textSearchHead">
             <div class="tabs" role="tablist" aria-label="カテゴリ">
               <button class="tab active" type="button">食品</button>
@@ -89,21 +91,30 @@
               <div class="results-scroll" id="resultsList" aria-label="検索結果一覧">
                 <button class="result" type="button">
                   <div class="thumb"><img src="./assets/sample_thumb_1.jpg" alt=""></div>
-                  <div class="rname">きのこの山</div>
+                  <div class="name-wrap">
+                    <div class="cat">チョコレート</div>
+                    <div class="rname">きのこの山</div>
+                  </div>
                   <div class="pin" aria-hidden="true">📍</div>
                   <div class="chev" aria-hidden="true">›</div>
                 </button>
 
                 <button class="result" type="button">
                   <div class="thumb"><img src="./assets/sample_thumb_2.jpg" alt=""></div>
-                  <div class="rname">キットカット</div>
+                  <div class="name-wrap">
+                    <div class="cat">輸入菓子</div>
+                    <div class="rname">キットカット</div>
+                  </div>
                   <div class="pin" aria-hidden="true">📍</div>
                   <div class="chev" aria-hidden="true">›</div>
                 </button>
 
                 <button class="result" type="button">
                   <div class="thumb"><img src="./assets/sample_thumb_3.jpg" alt=""></div>
-                  <div class="rname">地球グミ</div>
+                  <div class="name-wrap">
+                    <div class="cat">輸入菓子</div>
+                    <div class="rname">地球グミ</div>
+                  </div>
                   <div class="pin" aria-hidden="true">📍</div>
                   <div class="chev" aria-hidden="true">›</div>
                 </button>
