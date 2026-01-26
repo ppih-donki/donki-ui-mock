@@ -1,5 +1,4 @@
 (() => {
-  // ----- flags/tabs (mock) -----
   const flags = Array.from(document.querySelectorAll(".flag"));
   const tabs = Array.from(document.querySelectorAll(".tab"));
 
@@ -17,14 +16,12 @@
     });
   });
 
-  // ----- search overlay -----
   const overlay = document.getElementById("searchOverlay");
   let overlayTimer = null;
 
   const showSearchingFor2s = () => {
     if (!overlay) return Promise.resolve();
 
-    // 連打対策：タイマーが残ってたらリセット
     if (overlayTimer) {
       clearTimeout(overlayTimer);
       overlayTimer = null;
@@ -41,7 +38,6 @@
     });
   };
 
-  // ----- text search behavior (stack results) -----
   const searchBtn = document.getElementById("searchBtn");
   const searchInput = document.getElementById("searchInput");
   const body = document.getElementById("textSearchBody");
@@ -49,13 +45,16 @@
 
   let hasShownOnce = false;
 
-  const makeResultButton = (name, thumbSrc) => {
+  const makeResultButton = (category, name, thumbSrc) => {
     const btn = document.createElement("button");
     btn.className = "result";
     btn.type = "button";
     btn.innerHTML = `
       <div class="thumb"><img src="${thumbSrc}" alt=""></div>
-      <div class="rname">${name}</div>
+      <div class="name-wrap">
+        <div class="cat">${category}</div>
+        <div class="rname">${name}</div>
+      </div>
       <div class="pin" aria-hidden="true">📍</div>
       <div class="chev" aria-hidden="true">›</div>
     `;
@@ -66,9 +65,13 @@
     if (!resultsList) return;
 
     const thumb = "./assets/sample_thumb_2.jpg";
-    const names = ["たけのこのさと", "チョコもなかジャンボ", "やきいも"];
+    const items = [
+      { cat: "チョコレート", name: "たけのこのさと" },
+      { cat: "アイス", name: "チョコもなかジャンボ" },
+      { cat: "焼き芋", name: "やきいも" }
+    ];
 
-    const nodes = names.map(n => makeResultButton(n, thumb));
+    const nodes = items.map(it => makeResultButton(it.cat, it.name, thumb));
     for (let i = nodes.length - 1; i >= 0; i--) {
       resultsList.insertBefore(nodes[i], resultsList.firstChild);
     }
@@ -82,12 +85,10 @@
   };
 
   const runSearchFlow = async () => {
-    // 2秒「検索中」演出
     if (searchBtn) searchBtn.disabled = true;
     await showSearchingFor2s();
     if (searchBtn) searchBtn.disabled = false;
 
-    // 演出後に結果更新（見た目確認用）
     showResultsAreaIfNeeded();
 
     if (hasShownOnce) {
@@ -121,7 +122,6 @@
   if (uploadBtn) uploadBtn.addEventListener("click", () => alert("（モック）画像アップロード"));
   if (mapBtn) mapBtn.addEventListener("click", () => alert("（モック）フロアマップ表示"));
 
-  // ----- reco auto slide (1 sec / infinite) -----
   const track = document.querySelector(".reco-track");
   if (!track) return;
 
