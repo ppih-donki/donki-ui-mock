@@ -210,7 +210,6 @@ body{
   padding: 10px 12px 12px;
 }
 
-/* 追加：テキスト検索見出し（アップロード見出しと同じ見た目） */
 .text-title{
   font-weight:900;
   font-size: var(--fs-upload-title);
@@ -348,7 +347,6 @@ body{
 }
 .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-/* 追加：分類＋商品名（左寄せ） */
 .name-wrap{
   display:flex;
   flex-direction:column;
@@ -434,4 +432,28 @@ body{
   .header{ padding:14px 12px 8px; }
   .main{ padding:8px 12px 10px; }
   .results-scroll{ max-height: 190px; }
+}
+
+/* ★追加：スマホ実機では全画面をオレンジ背景にする（黒枠を消す） */
+@media (max-width:520px){
+  body{
+    padding:0;
+    background: var(--bg);
+    background-image: url("./assets/bg_pattern.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .phone{
+    width:100%;
+    height:100dvh;
+    padding:0;
+    border-radius:0;
+    background: transparent;
+    box-shadow:none;
+  }
+
+  .app{
+    border-radius:0;
+  }
 }
