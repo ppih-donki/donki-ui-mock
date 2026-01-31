@@ -11,16 +11,16 @@
   --radius-lg: 18px;
   --radius-md: 14px;
 
-  --fs-title: clamp(11px, 2.8vw, 13px);
-  --fs-upload-title: clamp(9px, 2.2vw, 11px);
-  --fs-tab: clamp(8px, 2.0vw, 9px);
-  --fs-btn: clamp(9px, 2.3vw, 11px);
-  --fs-input: clamp(8px, 2.0vw, 9px);
-  --fs-hint-strong: clamp(8px, 2.0vw, 9px);
-  --fs-hint-sub: clamp(7px, 1.7vw, 8px);
-  --fs-result: clamp(10px, 2.6vw, 12px);
-  --fs-map: clamp(11px, 3.1vw, 16px);
-  --fs-reco: clamp(13px, 3.6vw, 19px);
+  --fs-title: clamp(18px, 4.6vw, 22px);
+  --fs-upload-title: clamp(15px, 3.6vw, 18px);
+  --fs-tab: clamp(12px, 3.2vw, 14px);
+  --fs-btn: clamp(15px, 3.8vw, 18px);
+  --fs-input: clamp(13px, 3.4vw, 15px);
+  --fs-hint-strong: clamp(13px, 3.4vw, 15px);
+  --fs-hint-sub: clamp(11px, 3.0vw, 12px);
+  --fs-result: clamp(16px, 4.2vw, 20px);
+  --fs-map: clamp(18px, 5.2vw, 26px);
+  --fs-reco: clamp(22px, 6.0vw, 32px);
 }
 
 *{ box-sizing:border-box; }
@@ -115,12 +115,12 @@ body{
 }
 .modal-title{
   font-weight:1000;
-  font-size: clamp(9px, 2.4vw, 11px);
+  font-size: clamp(15px, 4.0vw, 18px);
   margin-bottom:10px;
 }
 .modal-line{
   font-weight:800;
-  font-size: clamp(7px, 1.9vw, 9px);
+  font-size: clamp(12px, 3.2vw, 14px);
   line-height: 1.45;
   color:#2b2b2b;
   margin-bottom:8px;
@@ -131,7 +131,7 @@ body{
   border-radius: 12px;
   padding:12px 10px;
   font-weight:1000;
-  font-size: clamp(8px, 2.1vw, 10px);
+  font-size: clamp(14px, 3.6vw, 16px);
   color:#fff;
   background: linear-gradient(180deg, var(--blue), var(--blue2));
   box-shadow: 0 10px 18px rgba(0,0,0,.18);
@@ -168,7 +168,7 @@ body{
   background:#fff;
   box-shadow: 0 8px 16px rgba(0,0,0,.18);
   font-weight:900;
-  font-size: clamp(11px, 2.8vw, 13px);
+  font-size: clamp(18px, 4.6vw, 22px);
 }
 
 .lang{ text-align:center; }
@@ -310,13 +310,13 @@ body{
 }
 .mode-quick{
   font-weight:1000;
-  font-size: clamp(11px, 3.0vw, 17px);
+  font-size: clamp(18px, 5.0vw, 28px);
   color:#111;
   white-space:nowrap;
 }
 .mode-ai{
   font-weight:1000;
-  font-size: clamp(11px, 3.0vw, 17px);
+  font-size: clamp(18px, 5.0vw, 28px);
   color: var(--blue);
   white-space:nowrap;
 }
@@ -335,18 +335,19 @@ body{
 .mode-knob{
   position:absolute;
   top:4px;
-  left: calc(100% - 32px);
+  left:4px; /* ★デフォルト：左 */
   width:28px;
   height:28px;
   border-radius:999px;
   background:#fff;
   transition: left 180ms ease, background 180ms ease;
 }
+/* ★右にスライドした時（AI ON想定）：背景青 */
 .mode-switch.ai-on{
   background: var(--blue);
 }
 .mode-switch.ai-on .mode-knob{
-  left:4px;
+  left: calc(100% - 32px); /* ★AI ON：右 */
 }
 
 /* ===== text search ===== */
@@ -507,8 +508,8 @@ body{
   text-align:left;
 }
 
-.pin{ font-size: clamp(10px, 2.6vw, 12px); text-align:center; opacity:.9; }
-.chev{ font-size: clamp(13px, 3.2vw, 17px); color:#7f7f7f; text-align:right; }
+.pin{ font-size: clamp(16px, 4.2vw, 20px); text-align:center; opacity:.9; }
+.chev{ font-size: clamp(22px, 5.2vw, 28px); color:#7f7f7f; text-align:right; }
 
 /* ===== map ===== */
 .map-wrap{ margin-top:2px; }
@@ -525,7 +526,7 @@ body{
   gap:10px;
   cursor:pointer;
 }
-.play{ font-size: clamp(10px, 2.6vw, 12px); color:#2f4f96; }
+.play{ font-size: clamp(16px, 4.2vw, 20px); color:#2f4f96; }
 .map-text{
   font-weight:900;
   font-size: var(--fs-map);
